@@ -79,8 +79,8 @@ app.get('/', (req, res) => {
     <body>
       <div class="container">
         <h1>Welcome to MedInfo</h1>
-        <img src="https://via.placeholder.com/200" alt="Medical Icon">
-        <p>medInfo is a simple medical information service.</p>
+        <img src='/images/medi.jpeg' alt="Medical Icon">
+        <p>MedInfo APP is a simple medical information service.</p>
         <p>Get information about common medical conditions:</p>
         <ul>
           <li><a href="/api/medical-info/headache">Headache</a></li>
