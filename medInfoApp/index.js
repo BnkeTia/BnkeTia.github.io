@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Welcome to medInfo</title>
+      <title>Welcome to MedInfo APP</title>
       <style>
         body {
           font-family: Arial, sans-serif;
