@@ -1,135 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedInfoApp - Your Trusted Source of Medicinal Information</title>
-    <style>
-        /* Global styles */
+ <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to MedInfo APP</title>
+      <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f7f7f7;
-            color: #333;
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          background-color: #f8f9fa;
         }
-
-        /* Header styles */
-        header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
+        .container {
+          text-align: center;
         }
-
-        /* Main content styles */
-        main {
-            padding: 20px;
-            text-align: center;
+        h1 {
+          color: #007BFF;
+          margin-bottom: 20px;
         }
-
-        /* Footer styles */
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
+        ul {
+          list-style-type: none;
+          padding: 0;
         }
-
-        /* Search container styles */
-        .search-container {
-            margin-top: 20px;
-            text-align: center;
+        li {
+          margin-bottom: 10px;
         }
-
-        /* Search input styles */
-        input[type="text"] {
-            padding: 8px;
-            width: 60%;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
+        a {
+          color: #007BFF;
+          text-decoration: none;
         }
-
-        /* Search button styles */
-        button {
-            padding: 10px 20px;
-            border: 0;
-            border-radius: 4px;
-            font-size: 18px;
-            color: #fff;
-            background-color: #FF5A5F;
-            cursor: pointer;
+        a:hover {
+          text-decoration: underline;
         }
-
-        button:hover {
-            opacity: 0.9;
-        }
-
-        /* Image styles */
         img {
-            display: block;
-            margin: 30px auto;
-            max-width: 100%;
-            height: auto;
+          width: 200px;
+          height: auto;
+          margin-bottom: 20px;
         }
-    </style>
-</head>
-
-<body>
-    <header>
-        <h1>Welcome to MedInfoApp</h1>
-        <p>Your Medical Information Application</p>
-    </header>
-
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search..." onkeyup="handleSearch(event)">
-        <button onclick="performSearch()">Search</button>
-    </div>
-
-    <img src="images/medi.jpeg" alt="MedInfoApp Image">
-
-    <main>
-        <h2>About MedInfoApp</h2>
-        <p>
-            MedInfoApp is a user-friendly platform that allows you to organize and access your medical information easily.
-            Keep track of medications, appointments, medical history, and more!
-        </p>
-
-        <h2>Features</h2>
+        .search-container {
+          margin-top: 20px;
+        }
+        input[type="text"] {
+          padding: 10px;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin-right: 10px;
+          width: 250px;
+        }
+        button {
+          padding: 10px 20px;
+          font-size: 16px;
+          background-color: #007BFF;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #0056b3;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Welcome to MedInfo</h1>
+        <img src='/images/medi.jpeg' alt="Medical Icon">
+        <p>MedInfo APP is a simple medical information service.</p>
+        <p>Get information about common medical conditions:</p>
         <ul>
-            <li>Store and manage your medication list</li>
-            <li>Track upcoming medical appointments</li>
-            <li>View and update your medical history</li>
-            <li>Securely store emergency contacts</li>
+          <li><a href="/api/medical-info/headache">Headache</a></li>
+          <li><a href="/api/medical-info/fever">Fever</a></li>
+          <li><a href="/api/medical-info/cough">Cough</a></li>
+          <li><a href="/api/medical-info/flu">Flu</a></li>
+          <li><a href="/api/medical-info/heartburn">Heartburn</a></li>
+          <!-- Add more condition links here -->
         </ul>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 MedInfoApp. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // Function to perform search when Enter key is pressed
-        function handleSearch(event) {
-            if (event.keyCode === 13) {
-                performSearch();
-            }
+        <div class="search-container">
+          <input type="text" placeholder="Search for a condition...">
+          <button onclick="searchMedicalInfo()">Search</button>
+        </div>
+      </div>
+      
+      <script>
+        function searchMedicalInfo() {
+          const searchTerm = document.querySelector('input[type="text"]').value.trim();
+          if (searchTerm !== '') {
+            window.location.href = '/api/medical-info/' + searchTerm.toLowerCase();
+          }
         }
+      </script>
+    </body>
+    </html>
+  `);
+});
 
-        // Function to perform search
-        function performSearch() {
-            var input = document.getElementById("searchInput").value;
-            if (input.trim() !== "") {
-                // Implement your search logic here (e.g., redirect to search results page)
-                alert("Performing search: " + input);
-                // You can replace the alert with your actual search functionality
-            } else {
-                alert("Please enter a search query.");
-            }
-        }
-    </script>
-</body>
+// Route to get medical information based on condition
+app.get('/api/medical-info/:condition', (req, res) => {
+  const condition = req.params.condition;
+  const medicalInfo = getMedicalInfo(condition);
+  if (medicalInfo) {
+    res.send(`<h2>${condition.toUpperCase()}</h2><p>${medicalInfo}</p>`);
+  } else {
+    res.status(404).send(`<p>Medical information not found for ${condition}</p>`);
+  }
+});
 
-</html>
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
