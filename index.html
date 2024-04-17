@@ -1,127 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to MedInfo APP</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f8f9fa;
-    }
-    .container {
-      text-align: center;
-    }
-    h1 {
-      color: #007BFF;
-      margin-bottom: 20px;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-    a {
-      color: #007BFF;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    img {
-      width: 200px;
-      height: auto;
-      margin-bottom: 20px;
-    }
-    .search-container {
-      margin-top: 20px;
-    }
-    input[type="text"] {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-right: 10px;
-      width: 250px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #007BFF;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    #results {
-      margin-top: 20px;
-      text-align: left;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedInfoApp - Your Trusted Source of Medicinal Information</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Main content styles */
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Search container styles */
+        .search-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Search input styles */
+        input[type="text"] {
+            padding: 8px;
+            width: 60%;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Search button styles */
+        button {
+            padding: 10px 20px;
+            border: 0;
+            border-radius: 4px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #FF5A5F;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        /* Image styles */
+        img {
+            display: block;
+            margin: 30px auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Search results styles */
+        #searchResults {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        #searchResults h3 {
+            color: #007bff;
+        }
+
+        #searchResults ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #searchResults li {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Welcome to MedInfo</h1>
-    <img src='/public/images/medi.jpeg' alt="Medical Icon">
-    <p>MedInfo APP is a simple medical information service.</p>
-    <p>Get information about common medical conditions:</p>
-    <ul>
-      <li><a href="#" onclick="getMedicalInfo('headache')">Headache</a></li>
-      <li><a href="#" onclick="getMedicalInfo('fever')">Fever</a></li>
-      <li><a href="#" onclick="getMedicalInfo('cough')">Cough</a></li>
-      <li><a href="#" onclick="getMedicalInfo('flu')">Flu</a></li>
-      <li><a href="#" onclick="getMedicalInfo('heartburn')">Heartburn</a></li>
-      <!-- Add more condition links here -->
-    </ul>
+    <header>
+        <h1>Welcome to MedInfoApp</h1>
+        <p>Your Medical Information Application</p>
+    </header>
+
     <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Search for a condition...">
-      <button onclick="searchMedicalInfo()">Search</button>
+        <input type="text" id="searchInput" placeholder="Search..." onkeyup="handleSearch(event)">
+        <button onclick="performSearch()">Search</button>
     </div>
-    <div id="results"></div>
-  </div>
-  
-  <script>
-    async function getMedicalInfo(condition) {
-      try {
-        const response = await fetch(`/api/medical-info/${condition}`);
-        const data = await response.json();
-        displayMedicalInfo(data);
-      } catch (error) {
-        console.error('Error fetching medical information:', error);
-      }
-    }
 
-    function searchMedicalInfo() {
-      const searchTerm = document.getElementById('searchInput').value.trim();
-      if (searchTerm !== '') {
-        getMedicalInfo(searchTerm.toLowerCase());
-      }
-    }
+    <img src="images/medi.jpeg" alt="MedInfoApp Image">
 
-    function displayMedicalInfo(data) {
-      const resultsContainer = document.getElementById('results');
-      resultsContainer.innerHTML = ''; // Clear previous results
-      
-      if (data && typeof data === 'object') {
-        const { description, medications } = data;
-        const resultElement = document.createElement('div');
-        resultElement.innerHTML = `<p><strong>Description:</strong> ${description}</p><p><strong>Medications:</strong> ${medications.join(', ')}</p>`;
-        resultsContainer.appendChild(resultElement);
-      } else {
-        resultsContainer.textContent = 'No information available for this condition.';
-      }
-    }
-  </script>
+    <main>
+        <h2>About MedInfoApp</h2>
+        <p>
+            MedInfoApp is a user-friendly platform that allows you to organize and access your medical information easily.
+            Keep track of medications, appointments, medical history, and more!
+        </p>
+
+        <h2>Features</h2>
+        <ul>
+            <li>Store and manage your medication list</li>
+            <li>Track upcoming medical appointments</li>
+            <li>View and update your medical history</li>
+            <li>Securely store emergency contacts</li>
+        </ul>
+
+        <!-- Search results container -->
+        <div id="searchResults"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MedInfoApp. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to handle search when Enter key is pressed
+        function handleSearch(event) {
+            if (event.keyCode === 13) {
+                performSearch();
+            }
+        }
+
+        // Function to perform search
+        function performSearch() {
+            var input = document.getElementById("searchInput").value.trim();
+            var searchResultsContainer = document.getElementById("searchResults");
+
+            if (input !== "") {
+                // Simulated search results (replace with actual search logic)
+                var searchResults = [
+                    { title: "Headache", description: "Headaches can be caused by stress or dehydration." },
+                    { title: "Fever", description: "Fever is a common symptom of infections." },
+                    { title: "Cough", description: "Coughing can be due to cold, allergies, or respiratory conditions." }
+                    // Add more search results as needed
+                ];
+
+                // Clear previous search results
+                searchResultsContainer.innerHTML = "";
+
+                // Display search results
+                if (searchResults.length > 0) {
+                    searchResults.forEach(function (result) {
+                        var resultElement = document.createElement("div");
+                        resultElement.innerHTML = "<h3>" + result.title + "</h3><p>" + result.description + "</p>";
+                        searchResultsContainer.appendChild(resultElement);
+                    });
+                } else {
+                    searchResultsContainer.innerHTML = "<p>No results found for '" + input + "'</p>";
+                }
+            } else {
+                // Display error message if search input is empty
+                searchResultsContainer.innerHTML = "<p>Please enter a search query.</p>";
+            }
+        }
+    </script>
 </body>
+
 </html>

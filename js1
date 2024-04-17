@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const { getMedicalInfo } = require('./utils/some-utils');
+const { getMedicalInfo } = require('./utils');
 
 const app = express();
 const port = process.env.PORT || 3000;

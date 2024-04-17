@@ -1,17 +1,16 @@
-// index.js
-
 const express = require('express');
+const path = require('path');
 const { getMedicalInfo } = require('./utils');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve static assets (images, CSS, JavaScript) from the 'public' directory
-app.use(express.static('public'));
+// Serve static files (HTML, CSS, images)
+app.use(express.static(path.join(__dirname)));
 
 // Route for the homepage
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Route to get medical information based on condition
