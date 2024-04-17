@@ -98,19 +98,3 @@
     </html>
   `);
 });
-
-// Route to get medical information based on condition
-app.get('/api/medical-info/:condition', (req, res) => {
-  const condition = req.params.condition;
-  const medicalInfo = getMedicalInfo(condition);
-  if (medicalInfo) {
-    res.send(`<h2>${condition.toUpperCase()}</h2><p>${medicalInfo}</p>`);
-  } else {
-    res.status(404).send(`<p>Medical information not found for ${condition}</p>`);
-  }
-});
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
