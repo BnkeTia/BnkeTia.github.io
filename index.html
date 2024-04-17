@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedInfoApp - Your Medical Information Application</title>
+    <title>MedInfoApp - Your Trusted source of Medicinal Information</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,6 +23,7 @@
 
         main {
             padding: 20px;
+            text-align: center;
         }
 
         footer {
@@ -30,6 +31,25 @@
             color: #fff;
             text-align: center;
             padding: 10px;
+        }
+
+        .search-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 60%;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -54,11 +74,30 @@
             <li>View and update your medical history</li>
             <li>Securely store emergency contacts</li>
         </ul>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search...">
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2024 MedInfoApp. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Get the input field
+        var input = document.getElementById("searchInput");
+
+        // Execute a search when Enter key is pressed
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                // Perform the search (you can replace this with your actual search logic)
+                alert("Performing search: " + input.value);
+            }
+        });
+    </script>
+
+    <img src="images/medi.jpeg" alt="MedInfoApp Image">
 </body>
 
 </html>
