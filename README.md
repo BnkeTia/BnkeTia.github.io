@@ -18,3 +18,6 @@
 ## AUTHORS
 ### Bernard Nketia Acheampong ---BnKeTia
 ### Daniel ASARE Ntow
+
+### Deployed on github pages (https://bnketia.github.io)
+### [Click here](https://medium.com/@bernardnketia51/medinfo-app-e302241be083) to read blog on this project
